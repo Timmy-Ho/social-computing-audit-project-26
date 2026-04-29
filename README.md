@@ -30,7 +30,9 @@ We use **free, publicly available** sources to identify credibility of domains:
 
 | Source | Description | Link |
 |--------|-------------|------|
-| ... | ... | ... |
+| Wikipedia: Reliable Sources | ... | https://en.wikipedia.org/wiki/Wikipedia:Reliable_sources/Perennial_sources#Sources |
+| MBFC Dataset | ... | https://github.com/ramybaly/Article-Bias-Prediction |
+| OpenSources | ... | https://github.com/BigMcLargeHuge/opensources |
 
 ### Analysis Metrics
 
@@ -41,14 +43,16 @@ We use **free, publicly available** sources to identify credibility of domains:
 ```
 main/
 ├── data/
-│   └── queries.csv
+│   ├── queries.csv # List of all search queries (topic, neutral, slanted)
+|   ├── credibility_domains/ # Compiled lists from GitHub + Wikipedia
+|   └── raw_results/ # Scraped search results
 ├── results/
-│   ├── figures
+│   ├── figures/ # Plots and charts
 │   └── summary_stats.csv
 └── src/
-│   ├── analysis.py
-│   ├── credibility_classifier.py
-│   └── scraper.py
+│   ├── analysis.py # Statistical analysis
+│   ├── credibility_classifier.py # Domain matching against credibility lists
+│   └── scraper.py # Scraping script
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
