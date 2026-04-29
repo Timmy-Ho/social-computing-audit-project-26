@@ -1,0 +1,78 @@
+topic,query_type,query,page,position,url,domain,title,timestamp
+vaccines,neutral,vaccine information,1,1,https://www.bag.admin.ch/en/vaccinations-and-prevention,bag.admin.ch,Vaccinations and prevention,2026-04-29 17:55:18
+vaccines,neutral,vaccine information,1,2,https://www.infovac.ch/de/,infovac.ch,INFOVAC - Die Informationsplattform zu Impfungen in der ...,2026-04-29 17:55:27
+vaccines,neutral,vaccine information,1,3,https://www.vaccineinformation.org/,vaccineinformation.org,VaccineInformation.org | Vaccination Saves Lives!,2026-04-29 17:55:27
+vaccines,neutral,vaccine information,1,4,https://www.who.int/health-topics/vaccines-and-immunization,who.int,Vaccines and immunization,2026-04-29 17:55:27
+vaccines,neutral,vaccine information,1,5,https://www.cdc.gov/vaccines/index.html,cdc.gov,Vaccines & Immunizations,2026-04-29 17:55:27
+vaccines,neutral,vaccine information,1,6,https://www.immunize.org/vaccines/vis/about-vis/,immunize.org,Vaccine Information Statements (VISs) Overview,2026-04-29 17:55:27
+vaccines,neutral,vaccine information,1,7,https://vaccineknowledge.ox.ac.uk/home,vaccineknowledge.ox.ac.uk,Home | Vaccine Knowledge Project,2026-04-29 17:55:28
+vaccines,neutral,vaccine information,1,8,https://www.nhs.uk/vaccinations/,nhs.uk,Vaccinations,2026-04-29 17:55:29
+vaccines,neutral,vaccine information,1,9,https://www.who.int/teams/immunization-vaccines-and-biologicals/diseases/vaccination-information-hub,who.int,Vaccination Information Hub,2026-04-29 17:55:29
+vaccines,neutral,vaccine information,1,10,https://www.fda.gov/vaccines-blood-biologics/vaccines,fda.gov,Vaccines,2026-04-29 17:55:29
+vaccines,neutral,vaccine information,2,1,https://en.wikipedia.org/wiki/Vaccine,en.wikipedia.org,Vaccine,2026-04-29 17:55:33
+vaccines,neutral,vaccine information,2,2,https://www.healthychildren.org/English/safety-prevention/immunizations/Pages/default.aspx,healthychildren.org,Immunizations,2026-04-29 17:55:33
+vaccines,neutral,vaccine information,2,3,https://publications.aap.org/patiented/pages/c_VIS,publications.aap.org,Vaccine Information Statements | Pediatric Patient Education,2026-04-29 17:55:34
+vaccines,neutral,vaccine information,2,4,https://www.cdc.gov/vaccines/basics/index.html,cdc.gov,Vaccine Basics,2026-04-29 17:55:34
+vaccines,neutral,vaccine information,2,5,https://www.vaccinestoday.eu/stories/where-can-you-find-reliable-vaccine-information/,vaccinestoday.eu,Where can you find reliable vaccine information?,2026-04-29 17:55:34
+vaccines,neutral,vaccine information,2,6,https://www.immunize.org/clinical/topic/vis/,immunize.org,Clinical Resources: VIS-Related Resources,2026-04-29 17:55:34
+vaccines,neutral,vaccine information,2,7,https://travelhealthpro.org.uk/countries,travelhealthpro.org.uk,NaTHNaC - Country List,2026-04-29 17:55:34
+vaccines,neutral,vaccine information,2,8,https://www.chop.edu/vaccine-education-center/vaccine-information-statements-vis,chop.edu,Vaccine Information Statements (VIS),2026-04-29 17:55:34
+vaccines,neutral,vaccine information,2,9,https://www.nhs.uk/vaccinations/why-vaccination-is-important-and-the-safest-way-to-protect-yourself/,nhs.uk,Why vaccination is important and the safest way to protect ...,2026-04-29 17:55:34
+vaccines,neutral,vaccine information,2,10,https://www.ch.ch/en/health/vaccinations/,ch.ch,"Vaccinations against influenza, measles and other diseases",2026-04-29 17:55:34
+vaccines,slanted,vaccine dangers,1,1,https://www.cdc.gov/vaccines/basics/possible-side-effects.html,cdc.gov,Possible Side Effects from Vaccines,2026-04-29 17:55:47
+vaccines,slanted,vaccine dangers,1,2,https://www.who.int/news-room/questions-and-answers/item/vaccines-and-immunization-vaccine-safety,who.int,Vaccines and immunization: Vaccine safety,2026-04-29 17:55:48
+vaccines,slanted,vaccine dangers,1,3,https://vaccination-info.europa.eu/en/about-vaccines/vaccine-safety-and-side-effects,vaccination-info.europa.eu,Vaccine safety and side effects,2026-04-29 17:55:48
+vaccines,slanted,vaccine dangers,1,4,https://pmc.ncbi.nlm.nih.gov/articles/PMC1113535/,pmc.ncbi.nlm.nih.gov,Vaccination and its adverse effects: real or perceived - PMC,2026-04-29 17:55:48
+vaccines,slanted,vaccine dangers,1,5,https://vaccineknowledge.ox.ac.uk/vaccine-side-effects,vaccineknowledge.ox.ac.uk,Vaccine safety and side effects,2026-04-29 17:55:49
+vaccines,slanted,vaccine dangers,1,6,https://www.mayoclinic.org/healthy-lifestyle/infant-and-toddler-health/in-depth/vaccines/art-20048334,mayoclinic.org,"Childhood vaccines: Tough questions, straight answers",2026-04-29 17:55:49
+vaccines,slanted,vaccine dangers,1,7,https://ncirs.org.au/vaccine-side-effects/common-adverse-events-following-immunisation,ncirs.org.au,Common adverse events following immunisation,2026-04-29 17:55:49
+vaccines,slanted,vaccine dangers,1,8,https://www.science.org/content/article/rare-dangerous-side-effects-some-covid-19-vaccines-explained,science.org,"Rare, dangerous side effects of some COVID-19 vaccines ...",2026-04-29 17:55:49
+vaccines,slanted,vaccine dangers,1,9,https://www.hhs.gov/immunization/basics/safety/side-effects/index.html,hhs.gov,Vaccine Side Effects,2026-04-29 17:55:49
+vaccines,slanted,vaccine dangers,2,1,https://www.chop.edu/sites/default/files/2024-10/vaccine-education-center-vaccine-safety-eng.pdf,chop.edu,Vaccine Safety and Your Family,2026-04-29 17:55:53
+vaccines,slanted,vaccine dangers,2,2,https://www.canada.ca/en/public-health/services/vaccination-children/safety-concerns-side-effects.html,canada.ca,Vaccine safety and possible side effects,2026-04-29 17:55:53
+vaccines,slanted,vaccine dangers,2,3,https://www.londonvaccinationclinic.co.uk/blog/pros-and-cons-of-vaccines-london-vaccination-clinic/,londonvaccinationclinic.co.uk,Pros and Cons of Vaccines | London ...,2026-04-29 17:55:53
+vaccines,slanted,vaccine dangers,2,4,https://historyofvaccines.org/getting-vaccinated/vaccine-faq/vaccine-side-effects-and-adverse-events/,historyofvaccines.org,Vaccine Side Effects and Adverse Events,2026-04-29 17:55:53
+vaccines,slanted,vaccine dangers,2,5,https://www.sciencedirect.com/science/article/abs/pii/S0264410X99002923,sciencedirect.com,"Vaccine risks: real, perceived and unknown",2026-04-29 17:55:53
+vaccines,slanted,vaccine dangers,2,6,https://www.aaaai.org/tools-for-the-public/conditions-library/allergies/vaccine-myth-fact,aaaai.org,Vaccines: The Myths and the Facts,2026-04-29 17:55:54
+vaccines,slanted,vaccine dangers,2,7,https://www.nhs.uk/vaccinations/why-vaccination-is-important-and-the-safest-way-to-protect-yourself/,nhs.uk,Why vaccination is important and the safest way to protect ...,2026-04-29 17:55:54
+vaccines,slanted,vaccine dangers,2,8,https://www.healthnz.govt.nz/health-topics/immunisations/vaccine-side-effects-reactions-and-safety,healthnz.govt.nz,"Vaccine side effects, reactions and safety - Health New Zealand",2026-04-29 17:55:54
+vaccines,slanted,vaccine dangers,2,9,https://www.healthychildren.org/English/safety-prevention/immunizations/Pages/Weighing-the-Risks-and-Benefits.aspx,healthychildren.org,Are Vaccines Safe for Children? The Truth About Risks & ...,2026-04-29 17:55:54
+vaccines,slanted,vaccine dangers,2,10,https://pmc.ncbi.nlm.nih.gov/articles/PMC8611574/,pmc.ncbi.nlm.nih.gov,Dangers of mRNA vaccines - PMC - NIH,2026-04-29 17:55:54
+vaccines,neutral,vaccine facts,1,1,https://www.who.int/mongolia/health-topics/vaccines/10-facts-on-immunization,who.int,10 facts on immunization,2026-04-29 17:56:10
+vaccines,neutral,vaccine facts,1,2,https://www.unicef.org/stories/why-vaccines-matter-children,unicef.org,Facts about vaccines: Why vaccines matter for children,2026-04-29 17:56:10
+vaccines,neutral,vaccine facts,1,3,https://www.cdc.gov/global-immunization/fast-facts/index.html,cdc.gov,Fast Facts on Global Immunization,2026-04-29 17:56:12
+vaccines,neutral,vaccine facts,1,4,https://www.aaaai.org/tools-for-the-public/conditions-library/allergies/vaccine-myth-fact,aaaai.org,Vaccines: The Myths and the Facts,2026-04-29 17:56:19
+vaccines,neutral,vaccine facts,1,5,https://www.letsgetrealaboutvaccines.org/,letsgetrealaboutvaccines.org,Get the Facts | Let's Get Real,2026-04-29 17:56:19
+vaccines,neutral,vaccine facts,1,6,https://www.nhs.uk/vaccinations/,nhs.uk,Vaccinations,2026-04-29 17:56:19
+vaccines,neutral,vaccine facts,1,7,https://www.tuftsmedicine.org/about-us/news/vaccines-fact-vs-fiction,tuftsmedicine.org,Vaccines: Fact vs. Fiction,2026-04-29 17:56:19
+vaccines,neutral,vaccine facts,1,8,https://pmc.ncbi.nlm.nih.gov/articles/PMC7090020/,pmc.ncbi.nlm.nih.gov,Vaccine Safety: Myths and Misinformation - PMC,2026-04-29 17:56:19
+vaccines,neutral,vaccine facts,1,9,https://immunisationcoalition.org.au/diseases/immunisation-facts/,immunisationcoalition.org.au,Immunisation Facts,2026-04-29 17:56:19
+vaccines,neutral,vaccine facts,1,10,https://www.ecdc.europa.eu/en/news-events/ecdc-updates-its-key-facts-vaccine-effectiveness-and-safety-and-how-vaccines-used-eu,ecdc.europa.eu,ECDC updates its key facts on vaccine effectiveness and ...,2026-04-29 17:56:19
+vaccines,neutral,vaccine facts,2,1,https://www.texaschildrens.org/departments/center-vaccine-awareness-and-research/vaccine-facts-and-myths,texaschildrens.org,Vaccine Awareness and Research (CVAR),2026-04-29 17:56:23
+vaccines,neutral,vaccine facts,2,2,https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Immunization/Vaccine-Facts-What-You-Need-to-Know.aspx,cdph.ca.gov,Vaccine Facts: What You Need to Know - CDPH - CA.gov,2026-04-29 17:56:23
+vaccines,neutral,vaccine facts,2,3,https://www.mayoclinic.org/diseases-conditions/coronavirus/in-depth/coronavirus-vaccine/art-20484859,mayoclinic.org,COVID-19 vaccines: Get the facts,2026-04-29 17:56:23
+vaccines,neutral,vaccine facts,2,4,https://www.canr.msu.edu/vaccineeducation/Vaccine-Facts-and-Resources,canr.msu.edu,Vaccine Facts and Resources,2026-04-29 17:56:24
+vaccines,neutral,vaccine facts,2,5,https://www.who.int/health-topics/vaccines-and-immunization,who.int,Vaccines and immunization,2026-04-29 17:56:24
+vaccines,neutral,vaccine facts,2,6,https://myhealth.alberta.ca/Topic/Immunization/Pages/facts.aspx,myhealth.alberta.ca,Immunization and vaccine facts,2026-04-29 17:56:24
+vaccines,neutral,vaccine facts,2,7,https://vaccineknowledge.ox.ac.uk/home,vaccineknowledge.ox.ac.uk,Home | Vaccine Knowledge Project,2026-04-29 17:56:24
+vaccines,neutral,vaccine facts,2,8,https://www.youtube.com/watch?v=irGd9eruKGI,youtube.com,Vaccine myths and facts,2026-04-29 17:56:24
+vaccines,neutral,vaccine facts,2,9,https://www.healthychildren.org/English/safety-prevention/immunizations/Pages/vaccine-studies-examine-the-evidence.aspx,healthychildren.org,Vaccine Safety: Examine the Evidence,2026-04-29 17:56:24
+vaccines,neutral,vaccine facts,2,10,https://en.wikipedia.org/wiki/Vaccine,en.wikipedia.org,Vaccine,2026-04-29 17:56:24
+vaccines,slanted,vaccine scam,1,1,https://cfa.nhs.uk/fraud-prevention/COVID-19-guidance/COVID-19-vaccine-fraud,cfa.nhs.uk,COVID-19 vaccine fraud,2026-04-29 17:56:37
+vaccines,slanted,vaccine scam,1,2,https://pmc.ncbi.nlm.nih.gov/articles/PMC8828097/,pmc.ncbi.nlm.nih.gov,Fake COVID-19 vaccines: scams hampering the ... - PMC - NIH,2026-04-29 17:56:37
+vaccines,slanted,vaccine scam,1,3,https://www.scamwatch.gov.au/about-us/news-and-alerts/browse-news-and-alerts/covid-19-scams/covid-19-vaccination-scams,scamwatch.gov.au,COVID-19 vaccination scams,2026-04-29 17:56:37
+vaccines,slanted,vaccine scam,1,4,https://content.naic.org/article/consumer-alert-how-avoid-covid-19-vaccine-scams,content.naic.org,How to Avoid COVID-19 Vaccine Scams,2026-04-29 17:56:37
+vaccines,slanted,vaccine scam,1,5,https://assets.publishing.service.gov.uk/media/60115985d3bf7f05c06dfc7b/poster-guide-be-alert-to-vaccine-fraud.pdf,assets.publishing.service.gov.uk,COVID-19: VACCINE FRAUD,2026-04-29 17:56:37
+vaccines,slanted,vaccine scam,1,6,https://ujces.org/blog/covid-19-vaccine-scam,ujces.org,"How to Spot, Avoid and Report a Covid-19 Vaccine Scam",2026-04-29 17:56:37
+vaccines,slanted,vaccine scam,1,7,https://www.bmj.com/content/383/bmj.p2308,bmj.com,Surgeon who repeated false claims about covid and ...,2026-04-29 17:56:38
+vaccines,slanted,vaccine scam,1,8,https://www.phauk.org/vaccines/vaccine-fraud-be-aware-of-scams/,phauk.org,Vaccine fraud: Be aware of scams - PHA UK,2026-04-29 17:56:38
+vaccines,slanted,vaccine scam,1,9,https://www.safemedicines.org/covid-vaccine-scams,safemedicines.org,COVID-19 Vaccine Scams,2026-04-29 17:56:38
+vaccines,slanted,vaccine scam,2,1,https://www.safemedicines.org/covid-vaccine-scams,safemedicines.org,COVID-19 Vaccine Scams,2026-04-29 17:56:42
+vaccines,slanted,vaccine scam,2,2,https://portal.ct.gov/coronavirus/covid-19-knowledge-base/beware-of-vaccine-scams,portal.ct.gov,Beware of Vaccine Scams,2026-04-29 17:56:42
+vaccines,slanted,vaccine scam,2,3,https://www.texasattorneygeneral.gov/consumer-protection/beware-vaccine-scams,texasattorneygeneral.gov,Beware Vaccine Scams | Office of the Attorney General,2026-04-29 17:56:42
+vaccines,slanted,vaccine scam,2,4,https://www.weatherbys.bank/help-and-support/latest-scams/scam-alert-fake-covid-19-vaccine-texts-and-calls/,weatherbys.bank,Scam alert: Fake COVID-19 vaccine texts and calls - Weatherbys,2026-04-29 17:56:42
+vaccines,slanted,vaccine scam,2,5,https://www.ftc.gov/system/files/attachments/coronavirus-advice-consumers/20199_covid_vaccine_scams_infographic_8-5x11_v3.pdf,ftc.gov,Three Ways to Avoid COVID-19 Vaccine Scams infographic,2026-04-29 17:56:42
+vaccines,slanted,vaccine scam,2,6,https://www.phauk.org/vaccines/vaccine-fraud-be-aware-of-scams/,phauk.org,Vaccine fraud: Be aware of scams - PHA UK,2026-04-29 17:56:42
+vaccines,slanted,vaccine scam,2,7,https://www.justice.gov/archives/coronavirus,justice.gov,Coronavirus Response,2026-04-29 17:56:42
+vaccines,slanted,vaccine scam,2,8,https://www.bbc.co.uk/news/business-58029113,bbc.co.uk,'Covid vaccine scammers nearly got me',2026-04-29 17:56:43
+vaccines,slanted,vaccine scam,2,9,https://www.lowyinstitute.org/the-interpreter/blockchain-solution-covid-19-vaccine-scams,lowyinstitute.org,A blockchain solution to Covid-19 vaccine scams,2026-04-29 17:56:43
