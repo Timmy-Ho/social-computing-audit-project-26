@@ -38,4 +38,18 @@ We use **free, publicly available** sources to identify credibility of domains:
 
 ## Repository Structure
 
-...
+```
+main/
+├── data/
+│   └── queries.csv
+├── results/
+│   ├── figures
+│   └── summary_stats.csv
+└── src/
+│   ├── analysis.py
+│   ├── credibility_classifier.py
+│   └── scraper.py
+├── README.md
+├── requirements.txt
+├── .gitignore
+```
