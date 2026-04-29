@@ -1,0 +1,14 @@
+# Web Scraping
+selenium
+beautifulsoup4
+requests
+
+# Data Processing
+pandas
+numpy
+
+# Visualization
+matplotlib
+seaborn
+scikit-learn
+plotly
