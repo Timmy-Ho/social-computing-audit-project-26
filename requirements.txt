@@ -2,6 +2,7 @@
 selenium
 beautifulsoup4
 requests
+selenium-stealth
 
 # Data Processing
 pandas

@@ -3,9 +3,8 @@ Google Search Scraper
 Handles: Results, AI-generated section, sponsored tag
 """
 
-# TODO: Check if AI section gets scraped or not
 # TODO: Need to check for sponsored sources and probably skip them
-# TODO: Need to be tested for running a larger amount of queries => Delays might not be large enough to circumvent bot detection
+# Scraper might require an initial captcha check, but should be fine afterwards
 
 import time
 import random
@@ -15,14 +14,16 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
+from selenium_stealth import stealth
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from urllib.parse import urlparse, quote
 import csv
 
+
 # Config
-PAGES_TO_SCRAPE = 2
-DELAY_BETWEEN_QUERIES = 3
+PAGES_TO_SCRAPE = 3
+DELAY_BETWEEN_QUERIES = 5
 DELAY_BETWEEN_PAGES = 1
 MAX_RETRIES = 2
 
@@ -31,15 +32,34 @@ SPONSORED_KEYWORDS = []
 
 driver = None
 
-def setup_driver(): # Possible configurations via Options()
+def setup_driver():
     global driver
     chrome_options = Options()
-    chrome_options.add_argument("--lang=en") # Doesn't work?
+    chrome_options.add_argument("--lang=en")
+    chrome_options.add_argument("--user-data-dir=/tmp/chrome_profile_google")
+    chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36")
+    chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    chrome_options.add_experimental_option("useAutomationExtension", False)
+    
     driver = webdriver.Chrome(options=chrome_options)
-    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+    
+    # Apply stealth
+    stealth(driver,
+        languages=["en-US", "en"],
+        vendor="Google Inc.",
+        platform="Win32",
+        webgl_vendor="Intel Inc.",
+        renderer="Intel Iris OpenGL Engine",
+        fix_hairline=True,
+    )
+    
     return driver
 
-def random_delay(min_sec=1, max_sec=3):
+def random_delay(min_sec=2, max_sec=6):
     time.sleep(random.uniform(min_sec, max_sec))
 
 def accept_cookies():
@@ -73,6 +93,7 @@ def get_next_page_url(driver, current_page_num):
 
 def extract_results(driver, query, query_type, topic, page_num):
     results = []
+    sponsored_skipped = 0
     try:
         WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.ID, "rso"))
@@ -84,7 +105,8 @@ def extract_results(driver, query, query_type, topic, page_num):
         
         for elem in result_elements:
             try:
-                # TODO: Sponsored skip?
+                if check_for_captcha(): 
+                    manual_captcha_handler()
                 
                 link_element = elem.find_element(By.CSS_SELECTOR, "a")
                 url = link_element.get_attribute("href")
@@ -118,6 +140,7 @@ def extract_results(driver, query, query_type, topic, page_num):
                 position += 1
             except Exception as e:
                 continue
+        # print(f"Page {page_num}: {sponsored_skipped} sponsored skipped")
     except Exception as e:
         print(f" Error extracting results: {e}")
     
@@ -132,13 +155,8 @@ def manual_captcha_handler():
 
 def check_for_captcha():
     try:
-        # AI captcha selectors
-        captcha_selectors = [
-            "iframe[src*='captcha']",
-            "div[aria-label*='captcha']",
-            "form[action*='captcha']",
-            "div[jsname='YJMvMc']",  # Google's CAPTCHA container
-            "#captcha-form"
+        captcha_selectors = [ # Might need to be changed depending on browser changes 
+            "div[jsname='YJMvMc']"  # Google's CAPTCHA container
         ]
         
         for selector in captcha_selectors:
@@ -160,18 +178,25 @@ def perform_search(driver, query, topic, query_type, pages=PAGES_TO_SCRAPE):
     ai_data = None
     
     print(f" Searching: '{query}")
+    current_url = driver.current_url
+    if "google.com" not in current_url:
+        driver.get(f"https://www.google.com/search?q={query.replace(' ', '+')}&hl=en")
+        random_delay(2, 4)
+        accept_cookies()
+    #accept_cookies()
     
-    driver.get("https://www.google.com")
-    accept_cookies()
-    time.sleep(2)
-    
-    if check_for_captcha():
+    if check_for_captcha(): 
         manual_captcha_handler()
     
+    accept_cookies()
+    
     try:
-        search_box = driver.find_element(By.NAME, "q")
+        search_box = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.NAME, "q"))
+        )
         search_box.clear()
         search_box.send_keys(query)
+        random_delay(0.5, 1)
         search_box.send_keys(Keys.RETURN)
     except:
         print(f" Error: Coduln't enter search query")
@@ -186,8 +211,8 @@ def perform_search(driver, query, topic, query_type, pages=PAGES_TO_SCRAPE):
         print(f" Page {results_page}")
         time.sleep(1)
         
-        # TODO: AI Overview detection here
-
+        if check_for_captcha(): 
+            manual_captcha_handler()
         page_results = extract_results(driver, query, query_type, topic, results_page)
         all_results.extend(page_results)
         
@@ -196,7 +221,7 @@ def perform_search(driver, query, topic, query_type, pages=PAGES_TO_SCRAPE):
             next_url = get_next_page_url(driver, results_page)
             if next_url:
                 driver.get(next_url)
-                time.sleep(2)
+                time.sleep(4)
                 results_page += 1
             else:
                 print(f" No next page")
@@ -231,7 +256,7 @@ def run_scraping(queries_file='data/queries.csv', output_file='data/raw_results.
                     results = perform_search(driver, query, topic, query_type)
                     all_results.extend(results)
                     print(f"Collected {len(results)} total results")
-                    # TODO: Need to check AI here
+                    
                     break
                 except Exception as e:
                     print(f"Attempt {attempt + 1} failed: {e}")
@@ -252,6 +277,6 @@ if __name__ == "__main__":
     results = run_scraping(
         queries_file='data/queries.csv',
         output_file='data/raw_results.csv',
-        max_queries=2 # For testing
+        max_queries=10000 # For testing
     )
     
