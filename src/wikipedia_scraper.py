@@ -4,16 +4,30 @@ import re
 import time
 import pandas as pd
 from urllib.parse import urlparse
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 API_URL = "https://en.wikipedia.org/w/api.php" # Using MediaAPI from Wikipedia
 BASE_PAGE = "Wikipedia:Reliable_sources/Perennial_sources"
 
 HEADERS = {
-    'User-Agent': '' # To be inserted with own User Agent
+    'User-Agent': 'SocialComputingAuditProject/1.0 (timmyho2003@hotmail.com) Python/3.12 requests' # To be inserted with own User Agent
 }
 
 # Cache for domain lookups to avoid repeated requests
 DOMAIN_CACHE = {}
+
+# Create a session with retries
+session = requests.Session()
+retry_strategy = Retry(
+    total=3,
+    backoff_factor=2,  # Wait between retries
+    status_forcelist=[429, 500, 502, 503, 504],
+    allowed_methods=["GET"]
+)
+adapter = HTTPAdapter(max_retries=retry_strategy, pool_connections=10, pool_maxsize=10)
+session.mount('http://', adapter)
+session.mount('https://', adapter)
 
 def get_page_html(page_title):
     params = {
@@ -23,7 +37,7 @@ def get_page_html(page_title):
         'prop': 'text',
         'redirects': '1'
     }
-    resp = requests.get(API_URL, params=params, headers=HEADERS, timeout=30)
+    resp = session.get(API_URL, params=params, headers=HEADERS, timeout=30)
     resp.raise_for_status()
     data = resp.json()
     return data['parse']['text']['*']
@@ -32,76 +46,73 @@ def extract_official_domains_from_wikipedia(source_page_title):
     if not source_page_title or source_page_title.startswith('/w/'):
         return []
     
-    # Check cache in case of timeouts
     if source_page_title in DOMAIN_CACHE:
         return DOMAIN_CACHE[source_page_title]
     
     domains = []
     
-    try:
-        # Get the Wikipedia page HTML
-        params = {
-            'action': 'parse',
-            'page': source_page_title,
-            'format': 'json',
-            'prop': 'text',
-            'redirects': '1'
-        }
-        resp = requests.get(API_URL, params=params, headers=HEADERS, timeout=15)
-        resp.raise_for_status()
-        data = resp.json()
-        
-        if 'parse' not in data:
-            DOMAIN_CACHE[source_page_title] = []
-            return []
+    for attempt in range(3):
+        try:
+            params = {
+                'action': 'parse',
+                'page': source_page_title,
+                'format': 'json',
+                'prop': 'text',
+                'redirects': '1'
+            }
+            resp = session.get(API_URL, params=params, headers=HEADERS, timeout=10)
+            resp.raise_for_status()
+            data = resp.json()
             
-        html = data['parse']['text']['*']
-        soup = BeautifulSoup(html, 'html.parser')
-        
-        # Look for infobox
-        infobox = soup.find('table', class_='infobox')
-        if not infobox:
+            if 'parse' not in data:
+                DOMAIN_CACHE[source_page_title] = []
+                return []
+                
+            html = data['parse']['text']['*']
+            soup = BeautifulSoup(html, 'html.parser')
+            
+            infobox = soup.find('table', class_='infobox')
+            if not infobox:
+                DOMAIN_CACHE[source_page_title] = []
+                return []
+            
+            for row in infobox.find_all('tr'):
+                header = row.find('th')
+                if header and header.get_text():
+                    header_text = header.get_text().strip().lower()
+                    if 'website' in header_text or 'url' in header_text or 'official' in header_text or 'issn' in header_text:
+                        data_cell = row.find('td', class_='infobox-data')
+                        if not data_cell:
+                            data_cell = row.find('td')
+                        
+                        if data_cell:
+                            for link in data_cell.find_all('a', href=True):
+                                link_text = link.get_text(strip=True)
+                                if link_text:
+                                    clean = link_text.lower().strip().rstrip('/')
+                                    clean = re.sub(r'^https?://', '', clean)
+                                    if clean and clean not in domains:
+                                        domains.append(clean)
+            
+            DOMAIN_CACHE[source_page_title] = domains
+            return domains
+            
+        except requests.exceptions.ConnectionError as e:
+            print(f"      Connection error (attempt {attempt + 1}/3): {str(e)[:50]}")
+            if attempt < 2:
+                wait_time = (attempt + 1) * 5  
+                print(f"      Waiting {wait_time} seconds")
+                time.sleep(wait_time)
+            else:
+                DOMAIN_CACHE[source_page_title] = []
+                return []
+        except Exception as e:
+            print(f"      Error: {type(e).__name__}")
             DOMAIN_CACHE[source_page_title] = []
             return []
-        
-        # Find the row with "Website"
-        for row in infobox.find_all('tr'):
-            header = row.find('th')
-            if header and header.get_text():
-                header_text = header.get_text().strip().lower()
-                if 'website' in header_text or 'official' in header_text:
-                    data_cell = row.find('td', class_='infobox-data')
-                    if not data_cell:
-                        data_cell = row.find('td')
-                    
-                    if data_cell:
-                        # Extract domain from <a> tags
-                        for link in data_cell.find_all('a', href=True):
-                            link_text = link.get_text(strip=True)
-                            if link_text:
-                                link_text = link_text.lower().strip().rstrip('/')
-                                if link_text and link_text not in domains:
-                                    domains.append(link_text)
-                        
-                        # Also check plain text for domain patterns
-                        cell_text = data_cell.get_text(separator=' ', strip=True)
-                        domain_pattern = r'\b([a-zA-Z0-9][a-zA-Z0-9.-]*\.(?:ua|com|org|net|tv|info|co\.uk|io|me|gov|edu|ch|de|fr|ru|uk|us|ca|au))\b'
-                        found_domains = re.findall(domain_pattern, cell_text, re.IGNORECASE)
-                        for domain in found_domains:
-                            domain = domain.lower().strip()
-                            if domain and domain not in domains:
-                                domains.append(domain)
-        
-        DOMAIN_CACHE[source_page_title] = domains
-        return domains
-        
-    except requests.exceptions.Timeout:
-        print(f"    Timeout fetching {source_page_title}")
-        DOMAIN_CACHE[source_page_title] = []
-        return []
-    except Exception as e:
-        DOMAIN_CACHE[source_page_title] = []
-        return []
+    
+    DOMAIN_CACHE[source_page_title] = []
+    return []
 
 def extract_status_from_cell(cell):
     spans = cell.find_all('span', attrs={'typeof': 'mw:File'})
@@ -168,36 +179,32 @@ def extract_summary_from_cell(cell):
     return text[:1000] if text else ''
 
 def parse_table(table, skip_domain_lookup=False):
-    """Parse a wikitable containing sources"""
     sources = []
     rows = table.find_all('tr')
+    total_rows = len(rows[1:])
     
-    for idx, row in enumerate(rows[1:]):  # skip header
+    for idx, row in enumerate(rows[1:]):
         cells = row.find_all('td')
         if len(cells) >= 5:
-            # Source name (col 0)
             source_cell = cells[0]
             source_name = clean_source_name(source_cell.get_text(strip=True))
-            
-            # Get Wikipedia page title for this source
             wiki_title = get_source_wikipedia_title(source_cell)
             
-            # Status (col 1)
             status_cell = cells[1]
             status_text = extract_status_from_cell(status_cell)
             status = extract_status_icon(status_text)
             
-            # Summary (col 4)
             summary_cell = cells[4]
             summary = extract_summary_from_cell(summary_cell)
             
-            # Extract actual domain from Wikipedia page
             actual_domains = []
             if wiki_title and not skip_domain_lookup:
+                print(f"  [{idx+1}/{total_rows}] Processing: {source_name[:40]}...")
                 actual_domains = extract_official_domains_from_wikipedia(wiki_title)
                 if actual_domains:
-                    print(f"  Found domains for {source_name[:30]}: {', '.join(actual_domains)}")
-                time.sleep(0.2)
+                    print(f"     Found: {', '.join(actual_domains)}")
+                
+                time.sleep(2)  
 
             sources.append({
                 'source': source_name,
