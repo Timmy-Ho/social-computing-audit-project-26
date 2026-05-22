@@ -130,7 +130,19 @@ unreliable_only = df[df['credibility'] == 'unreliable']
 fig, ax = plt.subplots(figsize=(8, 6))
 
 # Box plot
-sns.boxplot(data=unreliable_only, x='query_type', y='position', ax=ax, palette=['#3498db', '#e74c3c'])
+order = ['neutral', 'slanted']
+sns.boxplot(data=unreliable_only, x='query_type', y='position', order=order, ax=ax, palette=['#3498db', '#e74c3c'])
+
+stats = unreliable_only.groupby('query_type')['position'].median().loc[order]
+for i, (query_type, med) in enumerate(stats.items()):
+    ax.text(
+        i, med,
+        f"Median = {med:.0f}",
+        ha='center',
+        va='bottom',
+        fontsize=10,
+        fontweight='bold'
+    )
 ax.set_title('Ranking Position of Unreliable Results', fontsize=14, fontweight='bold')
 ax.set_xlabel('Query Type', fontsize=12)
 ax.set_ylabel('Position (lower = higher ranked)', fontsize=12)
