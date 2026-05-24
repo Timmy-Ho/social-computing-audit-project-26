@@ -1,10 +1,12 @@
 import pandas as pd
 import re
 from rapidfuzz.distance import Levenshtein
+from opensources_classifier import run_opensources_classification
+
 
 def load_data():
-    df = pd.read_csv("../data/raw_results.csv", parse_dates=["timestamp"])
-    df_wiki = pd.read_csv("../data/raw_wikipedia_perennial_sources.csv")
+    df = pd.read_csv("data/raw_results.csv", parse_dates=["timestamp"])
+    df_wiki = pd.read_csv("data/raw_wikipedia_perennial_sources.csv")
     print(df.shape)
     return df, df_wiki
 
@@ -53,7 +55,7 @@ def split_ambiguous(df, df_wiki_expanded):
     undefined["reason"] = undefined["domain"].apply(
         lambda d: f"domain {d} matches multiple entries with conflicting statuses in raw_wikipedia_perennial_sources.csv"
     )
-    undefined.to_csv("../results/processed_sources_undefined.csv", index=False)
+    undefined.to_csv("results/processed_sources_undefined.csv", index=False)
     df = df[~df["domain"].isin(undefined["domain"])]
     print(f"Saved {len(undefined)} ambiguous rows to undefined") ##hopefully 0 if i ovveride all confusing sources
     return df, df_wiki_clear
@@ -73,7 +75,7 @@ def match_wiki_sources(df, df_wiki_clear):
 
     ##split in 3 files reliable/unreliable/mixed
     for status, group in processed_sources.groupby("status"):
-        filename = f"../results/processed_sources_{status}.csv"
+        filename = f"results/processed_sources_{status}.csv"
         group.to_csv(filename, index=False)
         print(f"Saved {len(group)} rows to {filename}")
 
@@ -86,7 +88,7 @@ def tag_academic(df):
     edu_ac["reason"] = edu_ac["domain"].apply(
         lambda d: f"domain {d} has .edu or .ac, indicating an academic institution"
     )
-    edu_ac.to_csv("../results/processed_sources_reliable.csv", mode="a", header=False, index=False) 
+    edu_ac.to_csv("results/processed_sources_reliable.csv", mode="a", header=False, index=False) 
     df = df[~df["domain"].str.endswith((".edu", ".ac"))]
     print(f"Added {len(edu_ac)} .edu/.ac rows to reliable")
     print(f"Remaining in df: {df.shape}")
@@ -103,7 +105,7 @@ def tag_gov_doi(df):
         else f"url {row['url']} contains doi.org, which is mixed",
         axis=1
     )
-    mixed.to_csv("../results/processed_sources_mixed.csv", mode="a", header=False, index=False)
+    mixed.to_csv("results/processed_sources_mixed.csv", mode="a", header=False, index=False)
     df = df[~mixed_mask]
     print(f"Added {len(mixed)} .gov/doi rows to mixed")
     print(f"Remaining in df: {df.shape}")
@@ -143,22 +145,23 @@ def tag_typosquats(df, df_wiki_expanded):
     typosquats = df[mask].copy()
     typosquats["status"] = "unreliable"
     typosquats["reason"] = [r for r, m in zip(reasons, mask) if m]
-    typosquats.to_csv("../results/processed_sources_unreliable.csv", mode="a", header=False, index=False)
+    typosquats.to_csv("results/processed_sources_unreliable.csv", mode="a", header=False, index=False)
     df = df[~mask]
     print(f"Found {len(typosquats)} typosquat domains")
     print(f"Remaining in df: {df.shape}")
     return df
 
-def save_remaining_grupped(df):
+def save_remaining(df):
     remaining_grouped = df.groupby("domain").agg(
         domain_count=("url", "count"),
         urls=("url", lambda x: ";".join(x)),
     ).reset_index()
 
     remaining_grouped = remaining_grouped.sort_values("domain_count", ascending=False)
-    remaining_grouped.to_csv("../results/remaining_sources.csv", index=False)
+    remaining_grouped.to_csv("results/remaining_sources.csv", index=False)
     print(f"Saved {len(remaining_grouped)} unique domains to remaining_sources.csv")
     print(remaining_grouped[["domain", "domain_count"]].head(10))
+    df.to_csv("results/remaining_data.csv", index=False)
 
 
 def add_manual_sources(df, manual_sources: dict):
@@ -171,7 +174,7 @@ def add_manual_sources(df, manual_sources: dict):
         if not domain_rows.empty:
             domain_rows["status"] = status
             domain_rows["reason"] = f"domain {domain} manually labeled as {status}"
-            filename = f"../results/processed_sources_{status}.csv"
+            filename = f"results/processed_sources_{status}.csv"
             domain_rows.to_csv(filename, mode="a", header=False, index=False)
             counts[status] += 1
             url_counts[status] += len(domain_rows)
@@ -209,11 +212,11 @@ manual_sources = {
 
 def check_duplicate_urls():
     files = {
-        "reliable": pd.read_csv("../results/processed_sources_reliable.csv"),
-        "unreliable": pd.read_csv("../results/processed_sources_unreliable.csv"),
-        "mixed": pd.read_csv("../results/processed_sources_mixed.csv"),
-        "undefined": pd.read_csv("../results/processed_sources_undefined.csv"),
-        "remaining": pd.read_csv("../results/remaining_data.csv"),
+        "reliable": pd.read_csv("results/processed_sources_reliable.csv"),
+        "unreliable": pd.read_csv("results/processed_sources_unreliable.csv"),
+        "mixed": pd.read_csv("results/processed_sources_mixed.csv"),
+        "undefined": pd.read_csv("results/processed_sources_undefined.csv"),
+        "remaining": pd.read_csv("results/remaining_data.csv"),
     }
 
     found_duplicates = False
@@ -245,9 +248,10 @@ df = match_wiki_sources(df, df_wiki_clear)
 df = tag_academic(df)
 df = tag_gov_doi(df)
 df = tag_typosquats(df, df_wiki_expanded)
-save_remaining_grupped(df)
+save_remaining(df)
 df = add_manual_sources(df, manual_sources)
-df.to_csv("../results/remaining_data.csv", index=False)
+save_remaining(df)
 check_duplicate_urls()
-save_remaining_grupped(df)
+df = run_opensources_classification()
+save_remaining(df)
 
