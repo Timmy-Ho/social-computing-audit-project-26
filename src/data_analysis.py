@@ -25,6 +25,8 @@ classified = pd.concat([
     mixed.assign(credibility="mixed")
 ])
 
+classified = classified.drop_duplicates(subset=['url'], keep='first')
+
 print(f"Classified {len(classified)} out of {len(df_raw)} results")
 print(f"  Reliable: {len(reliable)}")
 print(f"  Unreliable: {len(unreliable)}")
