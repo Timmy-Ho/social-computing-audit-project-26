@@ -102,7 +102,7 @@ def match_and_remove(df, lookup, reason_fn, label):
 
 
 # --- Load ---
-df = pd.read_csv("data/raw_results.csv", parse_dates=["timestamp"])
+df = pd.read_csv("results/remaining_data.csv", parse_dates=["timestamp"])
 df["domain"] = df["url"].apply(get_domain)
 df_wiki = pd.read_csv("data/raw_wikipedia_perennial_sources.csv")
 print(f"Loaded {len(df)} results")

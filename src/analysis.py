@@ -149,7 +149,7 @@ def tag_typosquats(df, df_wiki_expanded):
     print(f"Remaining in df: {df.shape}")
     return df
 
-def save_remaining(df):
+def save_remaining_grupped(df):
     remaining_grouped = df.groupby("domain").agg(
         domain_count=("url", "count"),
         urls=("url", lambda x: ";".join(x)),
@@ -161,6 +161,81 @@ def save_remaining(df):
     print(remaining_grouped[["domain", "domain_count"]].head(10))
 
 
+def add_manual_sources(df, manual_sources: dict):
+    counts = {"reliable": 0, "unreliable": 0, "mixed": 0}
+    url_counts = {"reliable": 0, "unreliable": 0, "mixed": 0}
+    matched_indices = []
+
+    for domain, status in manual_sources.items():
+        domain_rows = df[df["domain"] == domain].copy()
+        if not domain_rows.empty:
+            domain_rows["status"] = status
+            domain_rows["reason"] = f"domain {domain} manually labeled as {status}"
+            filename = f"../results/processed_sources_{status}.csv"
+            domain_rows.to_csv(filename, mode="a", header=False, index=False)
+            counts[status] += 1
+            url_counts[status] += len(domain_rows)
+            matched_indices.extend(domain_rows.index.tolist())
+
+    df = df.drop(index=matched_indices)
+
+    total = sum(counts.values())
+    total_urls = sum(url_counts.values())
+    print(f"Manual sources added: {total} total domains, {total_urls} total URLs ({counts['reliable']} reliable domains, {url_counts['reliable']} URLs, {counts['unreliable']} unreliable domains, {url_counts['unreliable']} URLs, {counts['mixed']} mixed domains, {url_counts['mixed']} URLs)")
+    
+    return df
+
+
+manual_sources = {
+    "en.wikipedia.org": "reliable", 
+    "researchgate.net": "mixed", #Generally reliable but it can have low quality draft or research papers
+    "nature.com": "reliable",  
+    "who.int": "reliable",  #whord health organisazion, very reliable
+    "link.springer.com": "reliable", #Reliable academic pubblisher
+    "healthline.com": "mixed",  #In general reliale but is made for consumers -> oversimplification, sensasionalization
+    "frontiersin.org": "mixed", #generally good but it has a lower editorial standards
+    "canada.ca": "mixed",  #generally good but it is a GOV site
+    "webmd.com": "reliable",  #It is consumer faced and it often only explain surface level, but it is reliable 
+    "mayoclinic.org": "reliable", #Very respeted medical institution
+    "nhs.uk": "mixed",  #Government site
+    "gov.uk": "mixed",  #Government site
+    "science.org": "reliable",  
+    "health.clevelandclinic.org": "reliable", #Site of prestigious cliveland clininc, fact and sience base article reviewd by their own doctors 
+    "academic.oup.com": "reliable",  #oxford university press 
+    "medicalnewstoday.com": "mixed",  #Generally reliabile but not high editorial standars
+    "onlinelibrary.wiley.com": "reliable",  #reliable academic pubblisher
+    "britannica.com": "reliable",  #It summorizes information (not good for primary academic source) but factually correct
+}
+
+def check_duplicate_urls():
+    files = {
+        "reliable": pd.read_csv("../results/processed_sources_reliable.csv"),
+        "unreliable": pd.read_csv("../results/processed_sources_unreliable.csv"),
+        "mixed": pd.read_csv("../results/processed_sources_mixed.csv"),
+        "undefined": pd.read_csv("../results/processed_sources_undefined.csv"),
+        "remaining": pd.read_csv("../results/remaining_data.csv"),
+    }
+
+    found_duplicates = False
+    file_names = list(files.keys())
+
+    for i in range(len(file_names)):
+        for j in range(i + 1, len(file_names)):
+            name_a = file_names[i]
+            name_b = file_names[j]
+            urls_a = set(files[name_a]["url"])
+            urls_b = set(files[name_b]["url"])
+            overlap = urls_a & urls_b
+            if overlap:
+                found_duplicates = True
+                print(f"DUPLICATE: {name_a} and {name_b} share {len(overlap)} URLs")
+                for url in list(overlap)[:5]:
+                    print(f"  - {url}")
+                if len(overlap) > 5:
+                    print(f"  ... and {len(overlap) - 5} more")
+
+    if not found_duplicates:
+        print("No duplicate URLs found across any files.")
 
 df, df_wiki = load_data()
 df_wiki_expanded = expand_wiki_domains(df_wiki)
@@ -170,4 +245,9 @@ df = match_wiki_sources(df, df_wiki_clear)
 df = tag_academic(df)
 df = tag_gov_doi(df)
 df = tag_typosquats(df, df_wiki_expanded)
-save_remaining(df)
+save_remaining_grupped(df)
+df = add_manual_sources(df, manual_sources)
+df.to_csv("../results/remaining_data.csv", index=False)
+check_duplicate_urls()
+save_remaining_grupped(df)
+
