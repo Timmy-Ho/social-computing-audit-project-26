@@ -376,12 +376,14 @@ df = tag_academic(df)
 df = tag_gov_doi(df)
 df = tag_typosquats(df, df_wiki_expanded)
 save_remaining(df)
-df = add_manual_sources(df, manual_sources)
-save_remaining(df)
+
+
 check_duplicate_urls()
 df = run_opensources_classification()
 save_remaining(df)
 df = match_mbfc(df)
+save_remaining(df)
+df = add_manual_sources(df, manual_sources)
 save_remaining(df)
 
 
