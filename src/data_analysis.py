@@ -173,9 +173,10 @@ print("Saved: results/figures/Q3_position_analysis.png")
 
 
 # ----- Q4: Topics with Highest Unreliable Percentage (Horizontal Bar Chart) -----
-# Answer to: Which topics are most vulnerale to misinformation, and does this differ between neutral vs slanted searches?
+# Answer to: Which topics are most vulnerable to misinformation, and does this differ between neutral vs slanted searches?
 topic_summary = df.groupby(['topic', 'query_type', 'credibility']).size().unstack(fill_value=0)
 topic_summary['unreliable_pct'] = topic_summary['unreliable'] / (topic_summary['reliable'] + topic_summary['unreliable'] + topic_summary['mixed']) * 100
+topic_summary['reliable_pct'] = topic_summary['reliable'] / (topic_summary['reliable'] + topic_summary['unreliable'] + topic_summary['mixed']) * 100
 
 top_topics_slanted = topic_summary.xs('slanted', level='query_type')['unreliable_pct'].sort_values(ascending=False).head(15)
 top_topics_neutral = topic_summary.xs('neutral', level='query_type')['unreliable_pct'].sort_values(ascending=False).head(15)
@@ -204,6 +205,67 @@ plt.tight_layout()
 plt.savefig('results/figures/Q4_topics_unreliable.png', dpi=150, bbox_inches='tight')
 plt.close()
 print("Saved: results/figures/Q4_topics_unreliable.png")
+
+
+# ----- Q5: Topics with Highest Reliable Percentage (Horizontal Bar Chart) -----
+# Answer to: Which topics consistently return reliable results, and does this differ between neutral vs slanted searches?
+top_reliable_slanted = topic_summary.xs('slanted', level='query_type')['reliable_pct'].sort_values(ascending=False).head(15)
+top_reliable_neutral = topic_summary.xs('neutral', level='query_type')['reliable_pct'].sort_values(ascending=False).head(15)
+
+fig, axes = plt.subplots(1, 2, figsize=(16, 10))
+
+# Slanted queries
+ax1 = axes[0]
+top_reliable_slanted.plot(kind='barh', ax=ax1, color='#2ecc71')
+ax1.set_title('Topics with Highest % of Reliable Results (Slanted Queries)', fontsize=14, fontweight='bold')
+ax1.set_xlabel('Reliable Results (%)', fontsize=12)
+ax1.set_ylabel('Topic', fontsize=12)
+ax1.set_xlim(0, 110)
+for i, v in enumerate(top_reliable_slanted.values):
+    ax1.text(v + 1, i, f'{v:.1f}%', va='center', fontsize=9)
+
+# Neutral queries
+ax2 = axes[1]
+top_reliable_neutral.plot(kind='barh', ax=ax2, color='#27ae60')
+ax2.set_title('Topics with Highest % of Reliable Results (Neutral Queries)', fontsize=14, fontweight='bold')
+ax2.set_xlabel('Reliable Results (%)', fontsize=12)
+ax2.set_ylabel('Topic', fontsize=12)
+ax2.set_xlim(0, 110)
+for i, v in enumerate(top_reliable_neutral.values):
+    ax2.text(v + 1, i, f'{v:.1f}%', va='center', fontsize=9)
+
+plt.tight_layout()
+plt.savefig('results/figures/Q5_topics_reliable.png', dpi=150, bbox_inches='tight')
+plt.close()
+print("Saved: results/figures/Q5_topics_reliable.png")
+
+
+# ----- Q6: Reliable vs Unreliable Topic Comparison (Grouped Bar Chart) -----
+# Answer to: For each topic, how does the reliable vs unreliable split compare side by side?
+topic_pct_neutral = topic_summary.xs('neutral', level='query_type')[['reliable_pct', 'unreliable_pct']].sort_values('reliable_pct', ascending=False).head(15)
+topic_pct_slanted = topic_summary.xs('slanted', level='query_type')[['reliable_pct', 'unreliable_pct']].sort_values('reliable_pct', ascending=False).head(15)
+
+fig, axes = plt.subplots(1, 2, figsize=(18, 10))
+
+for ax, data, title_suffix, colors in zip(
+    axes,
+    [topic_pct_neutral, topic_pct_slanted],
+    ['Neutral Queries', 'Slanted Queries'],
+    [['#2ecc71', '#e74c3c'], ['#27ae60', '#c0392b']]
+):
+    data[['reliable_pct', 'unreliable_pct']].plot(kind='barh', ax=ax, color=colors)
+    ax.set_title(f'Reliable vs Unreliable by Topic ({title_suffix})', fontsize=14, fontweight='bold')
+    ax.set_xlabel('Percentage (%)', fontsize=12)
+    ax.set_ylabel('Topic', fontsize=12)
+    ax.set_xlim(0, 120)
+    ax.legend(['Reliable %', 'Unreliable %'], fontsize=10)
+    for container in ax.containers:
+        ax.bar_label(container, fmt='%.1f%%', padding=2, fontsize=8)
+
+plt.tight_layout()
+plt.savefig('results/figures/Q6_reliable_vs_unreliable_topics.png', dpi=150, bbox_inches='tight')
+plt.close()
+print("Saved: results/figures/Q6_reliable_vs_unreliable_topics.png")
 
 
 # ----- Pie Chart of Overall Credibility -----
