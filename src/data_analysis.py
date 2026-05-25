@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from scipy.stats import chi2_contingency
+from scipy.stats import levene
 import os
 
 os.makedirs("results/figures", exist_ok=True)
@@ -128,7 +129,22 @@ print("Saved: results/figures/Q2_top_unreliable_domains.png")
 # Answer to: Do unreliable results rank higher (closer to position 1) in slanted vs neutral queries?
 unreliable_only = df[df['credibility'] == 'unreliable']
 
-# Single plot - no subplots needed
+# Calculate SD and other statistics
+stats_df = unreliable_only.groupby('query_type')['position'].agg(['mean', 'median', 'std', 'var', 'count'])
+print("\nPosition statistics for unreliable results:")
+print(stats_df)
+
+# Levene's test for equal variances
+neutral_positions = unreliable_only[unreliable_only['query_type'] == 'neutral']['position']
+slanted_positions = unreliable_only[unreliable_only['query_type'] == 'slanted']['position']
+
+stat, p_var = levene(neutral_positions, slanted_positions)
+print(f"\nLevene's test for equal variances: statistic = {stat:.3f}, p = {p_var:.4f}")
+if p_var < 0.05:
+    print("Variances are significantly different (spread differs by query type)")
+else:
+    print("No significant difference in variance")
+
 fig, ax = plt.subplots(figsize=(8, 6))
 
 # Box plot
