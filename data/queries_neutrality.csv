@@ -1,0 +1,182 @@
+topic,query,slanted,confirmed
+vaccines,vaccine information,vaccine dangers,1
+vaccines,vaccine facts,vaccine scam,1
+vaccines,childhood vaccination benefits,childhood vaccination risks,0
+vaccines,flu shot effectiveness,flu shot side effects,0
+vaccines,hpv vaccine effects,hpv vaccine dangers,1
+vaccine_passports,vaccine passport impact,immunity passport discrimination,1
+vaccine_passports,covid passport research,digital health pass privacy,1
+vaccine_passports,travel health certificate effectiveness,vaccine segregation,0
+covid19,COVID-19 vaccine efficacy,COVID-19 vaccine side effects,0
+covid19,coronavirus pandemic origin,coronavirus lab leak theory,1
+covid19,face masks effectiveness,face masks health risks,0
+covid19,lockdown effectiveness,lockdown harms,0
+climate_change,climate change evidence,climate change hoax,1
+climate_change,global warming science,global warming myth,1
+climate_change,sea level rise research,sea level rise exaggerated,1
+climate_change,carbon emissions impact,carbon emissions scam,1
+climate_change,renewable energy facts,renewable energy failures,1
+fluoridation,water fluoridation information,water fluoridation dangers,1
+fluoridation,fluoride dental health,fluoride toxicity,1
+fluoridation,community water fluoridation safety,fluoride neurotoxicity,0
+5g,5g technology health,5g radiation risks,1
+5g,5g safety research,5g dangers,1
+5g,5g health studies,5g electromagnetic hypersensitivity,1
+nuclear_power,nuclear power safety,nuclear power risks,0
+nuclear_power,nuclear waste management,nuclear waste danger,1
+nuclear_power,nuclear energy carbon emissions,nuclear accidents,1
+nuclear_power,nuclear fusion research,nuclear proliferation risks,1
+nuclear_waste,radioactive waste disposal research,nuclear waste leaks,1
+nuclear_waste,deep geological repository data,radioactive waste transportation risks,1
+pesticides,pesticide regulation science,pesticide health hazards,1
+pesticides,organic farming pesticide use,conventional pesticide dangers,1
+artificial_sweeteners,aspartame safety,aspartame dangers,0
+artificial_sweeteners,sucralose research,sucralose health risks,1
+artificial_sweeteners,stevia information,stevia side effects,1
+artificial_sweeteners,diet soda health,diet soda cancer risk,1
+electromagnetic_fields,emf safety research,emf health risks,1
+electromagnetic_fields,power lines health,power lines cancer,1
+electromagnetic_fields,cell phone radiation safety,cell phone radiation brain tumors,0
+electromagnetic_fields,wi-fi health effects,wi-fi radiation dangers,1
+essential_oils,essential oils therapeutic facts,essential oils toxicity,1
+essential_oils,tea tree oil safety,tea tree oil poisoning,0
+essential_oils,lavender oil research,lavender oil hormone disruption,1
+aluminum,aluminum in vaccines safety,aluminum vaccine toxicity,0
+aluminum,aluminum cookware safety,aluminum alzheimers link,0
+aluminum,aluminum antiperspirants cancer research,aluminum breast cancer,1
+mercury,mercury dental amalgam safety,mercury amalgam poisoning,0
+mercury,mercury in fish guidelines,mercury seafood dangers,1
+cloning,animal cloning research,cloning ethical concerns,1
+cloning,food cloning safety,cloned meat risks,0
+coal,clean coal technology,coal pollution deaths,0
+coal,carbon capture research,coal mining dangers,1
+coal,coal ash disposal safety,coal ash toxic waste,0
+plastic,plastic recycling impact,plastic recycling scam,1
+plastic,biodegradable plastics research,bioplastics environmental impact,1
+plastic,microplastics health research,microplastics human toxicity,1
+wind_energy,wind turbine safety,wind turbine syndrome,0
+wind_energy,offshore wind farm research,wind energy bird deaths,1
+wind_energy,wind power health effects,wind turbine noise complaints,1
+biodiesel,biodiesel environmental impact,biodiesel land use change,1
+biodiesel,algae biofuel research,biofuel food vs fuel,1
+artificial_intelligence,ai safety research,ai existential risk,1
+artificial_intelligence,ai alignment effects,ai uncontrolled intelligence,1
+artificial_intelligence,ai ethics guidelines,ai bias dangers,1
+gene_drives,gene drive malaria control,gene drive ecological risks,1
+gene_drives,crispr gene drive research,gene drive extinction threat,1
+gene_drives,gene drive regulation,selfish genetic elements danger,1
+synthetic_biology,synthetic biology facts,synthetic biology bioweapons,1
+synthetic_biology,genetic engineering research,designer babies ethics,1
+synthetic_biology,biohacking safety,garage biology risks,0
+nanotechnology,nanotechnology medical impact,nanoparticle toxicity,1
+nanotechnology,nanomaterials safety research,nanotech environmental impact,0
+nanotechnology,carbon nanotube applications,nanoparticle lung disease,1
+quantum_computing,quantum computing cryptography,quantum computer security risks,1
+quantum_computing,quantum supremacy research,quantum decryption threats,1
+quantum_computing,quantum ai research,quantum computing dangers,1
+lab_grown_meat,cultured meat safety,lab meat health risks,0
+lab_grown_meat,cellular agriculture research,test tube meat dangers,1
+lab_grown_meat,clean meat environmental impact,fake meat processing risks,1
+3d_printing,3d printed organs facts,3d printing bioprinting risks,1
+3d_printing,additive manufacturing research,3d printed gun dangers,1
+3d_printing,metal 3d printing safety,3d printing toxic emissions,0
+autonomous_vehicles,self driving car safety,autonomous vehicle accidents,0
+autonomous_vehicles,autonomous trucking impact,self driving truck dangers,1
+autonomous_vehicles,ai driving research,driverless car hacking risks,1
+cryptocurrency,bitcoin blockchain security,cryptocurrency environmental damage,0
+cryptocurrency,crypto mining energy use,bitcoin carbon footprint,1
+cryptocurrency,cryptocurrency financial inclusion,crypto scam risks,1
+blockchain,blockchain supply chain ,blockchain energy consumption,1
+blockchain,smart contracts security,blockchain vulnerabilities,0
+blockchain,decentralized finance research,defi hacking risks,1
+social_media,instagram mental health research,social media depression link,1
+social_media,tiktok algorithm study,tiktok addiction risks,1
+social_media,facebook misinformation research,facebook polarizing effects,1
+social_media,twitter echo chamber,online radicalization,1
+online_privacy,gdpr effectiveness,data collection privacy risks,0
+online_privacy,encryption security research,government backdoor dangers,1
+online_privacy,facial recognition benefits,facial recognition surveillance,0
+electronic_cigarettes,vaping smoking cessation,e cigarette lung disease,0
+electronic_cigarettes,nicotine replacement impact,vaping popcorn lung,1
+electronic_cigarettes,juul harm reduction,teen vaping epidemic,0
+obesity,weight loss surgery facts,obesity health risks,1
+obesity,healthy diet research,processed food dangers,1
+obesity,exercise impact,obesity treatment failures,1
+plant_based_diet,vegan health impact,plant based nutrient deficiencies,1
+plant_based_diet,vegetarian protein sources,soy estrogen concerns,1
+plant_based_diet,meat substitutes safety,processed vegan food risks,0
+raw_milk,raw milk impact,raw milk bacteria dangers,1
+raw_milk,unpasteurized milk research,raw milk food poisoning,1
+soy,soy health effects,soy estrogen effects,1
+soy,tofu nutrition research,soy thyroid problems,1
+soy,soy protein safety,gmo soy dangers,1
+dairy,dairy calcium consumptin facts,milk hormone concerns,1
+dairy,cheese nutrition research,dairy lactose intolerance,1
+dairy,yogurt probiotic health impact,raw dairy risks,1
+eggs,egg cholesterol safety,egg heart disease risk,0
+eggs,egg protein consumption,salmonella egg dangers,1
+eggs,pasteurized eggs research,raw egg safety,1
+sugar,sugar consumption effects,sugar addiction risks,1
+sugar,added sugar guidelines,high fructose corn syrup dangers,1
+sugar,natural sugar vs processed,artificial sweeteners cancer,1
+salt,sodium intake guidelines,salt hypertension risk,1
+salt,iodized salt diet,sea salt heavy metals,1
+salt,low sodium diet research,salt heart disease,1
+caffeine,caffeine health impact,caffeine anxiety risks,1
+caffeine,coffee antioxidant research,energy drink dangers,1
+caffeine,tea health effects,caffeine addiction,1
+alcohol,moderate alcohol consumption health impact,alcohol liver disease risk,1
+alcohol,wine heart health,binge drinking dangers,1
+alcohol,beer nutrition research,alcohol cancer risk,1
+fast_food,food safety regulations,fast food obesity,1
+fast_food,restaurant calorie labeling,food additive dangers,1
+fast_food,food processing research,fast food antibiotic meat,1
+organic_food,organic food diet facts,organic food scam,1
+organic_food,organic produce safety,organic farming pesticides,0
+tap_water,tap water safety,lead in tap water,0
+tap_water,water quality regulations,chlorine water dangers,1
+tap_water,fluoridated water consumption,water contamination risks,1
+bottled_water,bottled water convenience,plastic bottle pollution,0
+bottled_water,spring water consumption health impact,bottled water bacteria,1
+bottled_water,mineral water research,phthalate leaching,1
+mining,mining safety regulations,mining environmental damage,1
+mining,coal mining technology,mountaintop removal dangers,1
+mining,gold mining economic impact,mercury pollution gold mining,1
+deforestation,forest conservation effects,deforestation climate impact,0
+deforestation,rainforest protection research,palm oil deforestation,0
+deforestation,reforestation projects,illegal logging,1
+overfishing,sustainable fishing practices,overfishing ocean collapse,0
+overfishing,fisheries management research,bycatch dolphin deaths,1
+overfishing,aquaculture data,fish farm pollution,1
+poverty,welfare program effectiveness,poverty cycle,0
+poverty,minimum wage economical impact,welfare dependency,1
+poverty,universal basic income research,poverty traps,1
+education,public school data,common core failures,1
+education,charter school research,school voucher controversy,1
+education,online learning effectiveness,student loan debt crisis,0
+healthcare,universal healthcare facts,medicare for all costs,1
+healthcare,private insurance research,obamacare failures,1
+healthcare,healthcare reform,insurance coverage gaps,1
+cloning,animal cloning impact,human cloning ethics,1
+cloning,reproductive cloning research,therapeutic cloning debate,1
+cloning,cloning endangered species,clone farming,0
+gene_editing,crispr gene therapy,gene editing ethics,0
+gene_editing,crispr cas9 research,genetic modification dangers,1
+gene_editing,gene drive technology,designer babies,1
+cybersecurity,encryption security,government backdoors,1
+cybersecurity,cyber threat intelligence,hacking vulnerabilities,1
+cybersecurity,data breach prevention,ransomware attacks,1
+social_credit,digital identity impact,social credit system,1
+social_credit,citizen scoring research,government surveillance,1
+social_credit,trustworthiness rating,privacy concerns,1
+quantum_computing,quantum encryption research,quantum decryption threat,1
+quantum_computing,quantum machine learning,quantum computer hacking,1
+quantum_computing,post quantum cryptography,quantum supremacy,1
+space_exploration,space research data,space junk,1
+space_exploration,mars colonization,space tourism risks,1
+space_exploration,international space station,asteroid mining ethics,1
+space_exploration,space debris mitigation,space weaponization,0
+immigration,immigration data,immigration threath,1
+immigration,poulation growth,overpopulation,1
+Job_security,unemployment rate data,unemployment rise,1
+Job_security,unemployment projection related to Ai data,Ai taking over jobs,1
